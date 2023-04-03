@@ -9,14 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.3",
     "@types/node": "18.15.8",
     "@types/react": "18.0.29",
     "@types/react-dom": "18.0.11",
+    "@types/react-redux": "^7.1.25",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
+    "immutable": "^4.3.0",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-redux": "^8.0.5",
+    "redux-observable": "^2.0.0",
+    "rxjs": "^7.8.0",
     "styled-components": "^5.3.9",
     "typescript": "5.0.2"
   },

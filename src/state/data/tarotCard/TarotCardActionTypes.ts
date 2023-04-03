@@ -1,0 +1,4 @@
+export enum TarotCardActionTypes {
+    FETCH_THREE_TAROT_CARD_READING = "horoscope-astrology/FETCH_THREE_TAROT_CARD_READING",
+    FETCH_THREE_TAROT_CARD_READING_SUCCESS = "horoscope-astrology/FETCH_THREE_TAROT_CARD_READING_SUCCESS"
+}
