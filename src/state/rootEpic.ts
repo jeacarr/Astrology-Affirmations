@@ -29,7 +29,7 @@ const fetchThreeCardReadingEpic: Epic = (action$, state$) =>
                 "url": "https://horoscope-astrology.p.rapidapi.com/threetarotcards",
                 "method": "GET",
                 "headers": {
-                    "X-RapidAPI-Key": "6471948c29mshc84f1b7b6564f85p1021fbjsnd01bbab69cba",
+                    "X-RapidAPI-Key": process.env.API_KEY,
                     "X-RapidAPI-Host": "horoscope-astrology.p.rapidapi.com"
                 }
             }).pipe(

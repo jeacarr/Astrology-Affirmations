@@ -16,9 +16,9 @@ const CardReading: React.FC<Props> = (props: Props) => {
     useEffect(() => {
         dispatch(FetchThreeCardReadingCreator());
     },[dispatch])
-    
+
     return (
-        <>
+        <>\
         </>
     )
 };
