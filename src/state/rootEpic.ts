@@ -6,11 +6,6 @@ import { ajax } from "rxjs/ajax";
 import { TarotCard } from './data/tarotCard/TarotCard';
 import { FetchThreeCardReadingSuccessCreator } from './data/tarotCard/TarotCardActions';
 
-
-// action$: Observable<AnyAction>,
-//     state$: StateObservable<RootState>
-//     dependencies: EpicDependencies
-
  const options = {
         method: 'GET',
         headers: {
@@ -38,10 +33,6 @@ const fetchThreeCardReadingEpic: Epic = (action$, state$) =>
             );
         })
     );
-
-   
-    
-    
 
 export const rootEpic = combineEpics(
     fetchThreeCardReadingEpic,
