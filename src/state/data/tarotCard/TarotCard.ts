@@ -6,6 +6,7 @@ export interface TarotCardContract {
     desc: string;
     cbd_desc: string;
     sequence: number; 
+    upright: boolean;
 }
 
 export const TarotCardRecord = Record<TarotCardContract>({
@@ -13,7 +14,8 @@ export const TarotCardRecord = Record<TarotCardContract>({
     rdesc: "",
     desc: "",
     cbd_desc: "",
-    sequence: 0
+    sequence: 0,
+    upright: false,
 });
 
 export type TarotCard = RecordOf<TarotCardContract>;

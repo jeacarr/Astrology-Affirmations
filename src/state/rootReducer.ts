@@ -12,12 +12,14 @@ const TarotCardStateRecord = Record<TarotCardStateContract>({
     threeReading: []
 });
 
-type TarotCardState = RecordOf<TarotCardStateContract>;
-
 const tarotCardReducer = (state = new TarotCardStateRecord(), action: TarotCardActions) => {
     switch(action.type) {
         case types.FETCH_THREE_TAROT_CARD_READING_SUCCESS:
-            return state.set("threeReading", action.reading)
+            const reading = action.reading;
+            // reading.forEach((x) => {
+            //     x.set("upright", Math.random() < 0.5)
+            // })
+            return state.set("threeReading", reading)
         default:
             return state;
     }

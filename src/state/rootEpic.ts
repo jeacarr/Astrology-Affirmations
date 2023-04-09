@@ -1,7 +1,7 @@
 import { combineEpics, ofType } from "redux-observable";
 import { Epic } from './store';
 import { TarotCardActionTypes } from './data/tarotCard/TarotCardActionTypes';
-import { map, mergeMap, of, withLatestFrom } from "rxjs";
+import { map, mergeMap } from "rxjs";
 import { ajax } from "rxjs/ajax";
 import { TarotCard } from './data/tarotCard/TarotCard';
 import { FetchThreeCardReadingSuccessCreator } from './data/tarotCard/TarotCardActions';
@@ -17,14 +17,14 @@ import { FetchThreeCardReadingSuccessCreator } from './data/tarotCard/TarotCardA
 const fetchThreeCardReadingEpic: Epic = (action$, state$) =>
     action$.pipe(
         ofType(TarotCardActionTypes.FETCH_THREE_TAROT_CARD_READING),
-        mergeMap(() => {
+        mergeMap(() => { console.log(process.env)
             return ajax({
                 "async": true,
                 "crossDomain": true,
                 "url": "https://horoscope-astrology.p.rapidapi.com/threetarotcards",
                 "method": "GET",
                 "headers": {
-                    "X-RapidAPI-Key": process.env.API_KEY,
+                    "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
                     "X-RapidAPI-Host": "horoscope-astrology.p.rapidapi.com"
                 }
             }).pipe(
