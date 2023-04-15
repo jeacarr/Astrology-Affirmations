@@ -6,10 +6,11 @@ import { TarotCard } from '../../state/data/tarotCard/TarotCard';
 import { RootState } from '../../state/rootReducer';
 import { FetchThreeCardReadingCreator } from '../../state/data/tarotCard/TarotCardActions';
 import { Card } from '../layout/Card';
-import { groupBy } from 'rxjs';
-
+import React from 'react';
+import {Map} from "immutable"
+import styled from 'styled-components';
 interface Props{
-    reading: TarotCard[];
+    reading: Map<number,TarotCard>;
 }
 
 const CardReading: React.FC<Props> = (props: Props) => {
@@ -19,23 +20,27 @@ const CardReading: React.FC<Props> = (props: Props) => {
         dispatch(FetchThreeCardReadingCreator());
     },[dispatch])
 
-
+ 
+ 
     return (
         <>
-        {Object.keys(props.reading)
-            
-        }
-        {/* {props.reading.forEach((t) => {
-            return(
-                <Card 
-                    reading={t}     
-                    tarot={0}
-                />
-            )
-        })} */}
+            <ReadingContainer>
+                {props.reading.entrySeq().map(([key, value]) => 
+                    <Card 
+                        reading={value}     
+                        tarot={0}
+                        key={key}
+                    />
+                )}
+            </ReadingContainer>
         </>
     )
 };
+
+const ReadingContainer = styled.div `
+ margin: auto;
+`;
+
 const mapStateToProps = (state: RootState): Props => {
     return {
         reading: getThreeCardReading(state),

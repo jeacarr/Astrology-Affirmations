@@ -3,23 +3,20 @@ import { Record, RecordOf } from "immutable";
 import { TarotCard } from "./data/tarotCard/TarotCard";
 import { TarotCardActions } from './data/tarotCard/TarotCardActions';
 import { TarotCardActionTypes as types } from './data/tarotCard/TarotCardActionTypes';
+import {Map} from "immutable"
 
 interface TarotCardStateContract {
-    threeReading: TarotCard[];
+    threeReading: Map<number,TarotCard>;
 }
 
 const TarotCardStateRecord = Record<TarotCardStateContract>({
-    threeReading: []
+    threeReading:  Map<number,TarotCard>()
 });
 
 const tarotCardReducer = (state = new TarotCardStateRecord(), action: TarotCardActions) => {
     switch(action.type) {
         case types.FETCH_THREE_TAROT_CARD_READING_SUCCESS:
-            const reading = action.reading;
-            // reading.forEach((x) => {
-            //     x.set("upright", Math.random() < 0.5)
-            // })
-            return state.set("threeReading", reading)
+            return state.set("threeReading", action.reading)
         default:
             return state;
     }

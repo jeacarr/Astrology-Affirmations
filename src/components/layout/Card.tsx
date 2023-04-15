@@ -6,11 +6,12 @@ import Image from 'next/image'
 interface Props{
     reading: TarotCard;
     tarot: Tarot;
+    key: number;
 }
 
 export const Card: React.FC<Props> = (props: Props) => {
     return (
-        <div>
+        <Container>
             <Image 
                 loader={undefined}
                 src={TarotImage[props.tarot]}
@@ -21,6 +22,12 @@ export const Card: React.FC<Props> = (props: Props) => {
                     transform: props.reading.upright ? "none" : "rotate(180deg)"}}
             />
             <h4>{props.reading.name}</h4>
-        </div>
+        </Container>
     )
 }
+
+const Container = styled.div`
+    width: 200px;
+    float: left;
+    margin: 50px;
+`

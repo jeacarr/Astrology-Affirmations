@@ -3,8 +3,9 @@ import { Epic } from './store';
 import { TarotCardActionTypes } from './data/tarotCard/TarotCardActionTypes';
 import { map, mergeMap } from "rxjs";
 import { ajax } from "rxjs/ajax";
-import { TarotCard } from './data/tarotCard/TarotCard';
+import { TarotCard, TarotCardRecord } from './data/tarotCard/TarotCard';
 import { FetchThreeCardReadingSuccessCreator } from './data/tarotCard/TarotCardActions';
+import {Map} from "immutable"
 
  const options = {
         method: 'GET',
@@ -17,7 +18,7 @@ import { FetchThreeCardReadingSuccessCreator } from './data/tarotCard/TarotCardA
 const fetchThreeCardReadingEpic: Epic = (action$, state$) =>
     action$.pipe(
         ofType(TarotCardActionTypes.FETCH_THREE_TAROT_CARD_READING),
-        mergeMap(() => { console.log(process.env)
+        mergeMap(() => {
             return ajax({
                 "async": true,
                 "crossDomain": true,
@@ -28,11 +29,22 @@ const fetchThreeCardReadingEpic: Epic = (action$, state$) =>
                     "X-RapidAPI-Host": "horoscope-astrology.p.rapidapi.com"
                 }
             }).pipe(
-                map((response) => response.response as TarotCard[]),
-                map(FetchThreeCardReadingSuccessCreator)
+                map((res) => res.response as Object),
+                map((response: Object) => {
+                    console.log(Object.values(response))
+                    const responseMap: TarotCard[] =  Object.values(response)[0];
+                    const reading = Map<number,TarotCard> (
+                        responseMap.map((x) => [x.sequence,  new TarotCardRecord({
+                        ...x,
+                        upright: Math.random() < 0.5,
+                    }) ]));
+                    return FetchThreeCardReadingSuccessCreator(reading);
+                })
             );
         })
     );
+    
+
 
 export const rootEpic = combineEpics(
     fetchThreeCardReadingEpic,
