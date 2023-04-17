@@ -1,33 +1,42 @@
 import { Tarot, TarotImage } from "@/constants/TarotEnum";
 import { TarotCard } from "@/state/data/tarotCard/TarotCard";
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import Image from 'next/image'
+import React from "react";
 
 interface Props{
     reading: TarotCard;
     tarot: Tarot;
     key: number;
+    displayDescription: (card: TarotCard) => void;
 }
 
 export const Card: React.FC<Props> = (props: Props) => {
     return (
-        <Container>
+        <Container onClick={() =>props.displayDescription(props.reading)}>
             <Image 
-                loader={undefined}
-                src={TarotImage[props.tarot]}
+                src={"/images/tarotCards/CardBack.svg"}
                 alt={props.reading.name}
                 width={200}   
                 height={400}
-                style={{borderRadius:"10px", 
-                    transform: props.reading.upright ? "none" : "rotate(180deg)"}}
+                style={{
+                    borderRadius:"20px", 
+                    transform: props.reading.upright ? "none" : "rotate(180deg)", 
+                    boxShadow:"-4px -5px #575976",
+                }}
             />
-            <h4>{props.reading.name}</h4>
+            <Header>{props.reading.name}</Header>
         </Container>
     )
 }
 
 const Container = styled.div`
+    height: 600px;
     width: 200px;
     float: left;
     margin: 50px;
 `
+const Header = styled.h4`
+    text-align: center;
+`
+

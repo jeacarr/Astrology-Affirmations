@@ -31,7 +31,6 @@ const fetchThreeCardReadingEpic: Epic = (action$, state$) =>
             }).pipe(
                 map((res) => res.response as Object),
                 map((response: Object) => {
-                    console.log(Object.values(response))
                     const responseMap: TarotCard[] =  Object.values(response)[0];
                     const reading = Map<number,TarotCard> (
                         responseMap.map((x) => [x.sequence,  new TarotCardRecord({
@@ -44,8 +43,6 @@ const fetchThreeCardReadingEpic: Epic = (action$, state$) =>
         })
     );
     
-
-
 export const rootEpic = combineEpics(
     fetchThreeCardReadingEpic,
 );

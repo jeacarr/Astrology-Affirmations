@@ -15,12 +15,15 @@ interface Props{
 
 const CardReading: React.FC<Props> = (props: Props) => {
     const dispatch = useDispatch();
+    const [card, setCard] = React.useState("")
     
     useEffect(() => {
         dispatch(FetchThreeCardReadingCreator());
     },[dispatch])
 
- 
+    function handleChange(card: TarotCard) {
+        card.upright ? setCard(card.desc): setCard(card.rdesc);
+      }
  
     return (
         <>
@@ -30,15 +33,21 @@ const CardReading: React.FC<Props> = (props: Props) => {
                         reading={value}     
                         tarot={0}
                         key={key}
+                        displayDescription={handleChange}
                     />
                 )}
+                <h3>{card}</h3>
             </ReadingContainer>
+           
         </>
     )
 };
 
 const ReadingContainer = styled.div `
- margin: auto;
+    margin: auto;
+    width:"1500px";
+    display: block;
+
 `;
 
 const mapStateToProps = (state: RootState): Props => {
